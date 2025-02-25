@@ -7,23 +7,23 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockFlutterWifiControlPlatform
     with MockPlatformInterfaceMixin
     implements FlutterWifiControlPlatform {
-
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<String?> getSSID() => Future.value('fakeSSID');
 }
 
 void main() {
-  final FlutterWifiControlPlatform initialPlatform = FlutterWifiControlPlatform.instance;
+  final FlutterWifiControlPlatform initialPlatform =
+      FlutterWifiControlPlatform.instance;
 
   test('$MethodChannelFlutterWifiControl is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelFlutterWifiControl>());
   });
 
   test('getPlatformVersion', () async {
-    FlutterWifiControl flutterWifiControlPlugin = FlutterWifiControl();
-    MockFlutterWifiControlPlatform fakePlatform = MockFlutterWifiControlPlatform();
+    MockFlutterWifiControlPlatform fakePlatform =
+        MockFlutterWifiControlPlatform();
     FlutterWifiControlPlatform.instance = fakePlatform;
 
-    expect(await flutterWifiControlPlugin.getPlatformVersion(), '42');
+    expect(await FlutterWifiControl.getSSID(), 'fakeSSIDD');
   });
 }

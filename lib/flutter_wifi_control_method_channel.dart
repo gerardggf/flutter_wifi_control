@@ -10,8 +10,12 @@ class MethodChannelFlutterWifiControl extends FlutterWifiControlPlatform {
   final methodChannel = const MethodChannel('flutter_wifi_control');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<String?> getSSID() async {
+    try {
+      final String? ssid = await methodChannel.invokeMethod<String>('getSSID');
+      return ssid;
+    } catch (e) {
+      return null;
+    }
   }
 }

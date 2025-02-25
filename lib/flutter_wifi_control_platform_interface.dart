@@ -3,27 +3,19 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'flutter_wifi_control_method_channel.dart';
 
 abstract class FlutterWifiControlPlatform extends PlatformInterface {
-  /// Constructs a FlutterWifiControlPlatform.
   FlutterWifiControlPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static FlutterWifiControlPlatform _instance = MethodChannelFlutterWifiControl();
+  static FlutterWifiControlPlatform _instance =
+      MethodChannelFlutterWifiControl();
 
-  /// The default instance of [FlutterWifiControlPlatform] to use.
-  ///
-  /// Defaults to [MethodChannelFlutterWifiControl].
   static FlutterWifiControlPlatform get instance => _instance;
 
-  /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [FlutterWifiControlPlatform] when
-  /// they register themselves.
   static set instance(FlutterWifiControlPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
+  Future<String?> getSSID();
 }
